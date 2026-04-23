@@ -170,8 +170,99 @@ function ImageSlider() {
   );
 }
 
+const microFacts = [
+  { emoji: '🦠', fact: 'В 1 грамме почвы живёт до 1 миллиарда бактерий — больше, чем людей на Земле.' },
+  { emoji: '🫁', fact: 'Лёгкие здорового человека содержат около 10 000 видов микроорганизмов.' },
+  { emoji: '🧀', fact: 'Бактерия Lactobacillus превращает молоко в йогурт за 4–8 часов при 37°C.' },
+  { emoji: '🌊', fact: 'Половина кислорода на Земле производится микроскопическими водорослями в океане.' },
+  { emoji: '🧬', fact: 'ДНК одной бактерии E. coli в развёрнутом виде длиннее самой бактерии в 1000 раз.' },
+  { emoji: '🔴', fact: 'Грамположительные бактерии окрашиваются фиолетовым, грамотрицательные — красным по методу Грама.' },
+  { emoji: '⏱️', fact: 'Некоторые бактерии делятся каждые 20 минут: за сутки из одной клетки может вырасти 2⁷² потомков.' },
+  { emoji: '🌡️', fact: 'Экстремофилы выживают при +121°C (в гейзерах) и при −20°C (в арктическом льду).' },
+];
+
+function FactWidget() {
+  const [idx, setIdx] = useState(0);
+  const [animating, setAnimating] = useState(false);
+  const { ref, visible } = useIntersection();
+
+  const next = () => {
+    if (animating) return;
+    setAnimating(true);
+    setTimeout(() => { setIdx(i => (i + 1) % microFacts.length); setAnimating(false); }, 350);
+  };
+
+  const fact = microFacts[idx];
+
+  return (
+    <section ref={ref} className="py-10 px-4">
+      <div className="max-w-3xl mx-auto">
+        <div
+          onClick={next}
+          data-hover="true"
+          className="glass rounded-2xl p-6 sm:p-8 cursor-pointer select-none relative overflow-hidden"
+          style={{
+            borderColor: 'rgba(52,211,153,0.25)',
+            opacity: visible ? 1 : 0,
+            transform: visible ? 'translateY(0)' : 'translateY(30px)',
+            transition: 'opacity 0.7s ease, transform 0.7s ease',
+            boxShadow: '0 0 40px rgba(16,185,129,0.08)',
+          }}
+        >
+          <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 2, background: 'linear-gradient(90deg, transparent, #10b981, #34d399, transparent)' }} />
+          <div className="flex items-start gap-5">
+            <div className="flex-shrink-0 w-14 h-14 rounded-2xl flex items-center justify-center"
+              style={{ background: 'rgba(16,185,129,0.1)', border: '1px solid rgba(52,211,153,0.2)', fontSize: '1.8rem',
+                opacity: animating ? 0 : 1, transform: animating ? 'scale(0.8)' : 'scale(1)', transition: 'all 0.3s ease' }}>
+              {fact.emoji}
+            </div>
+            <div className="flex-1">
+              <div className="font-montserrat text-xs tracking-widest uppercase mb-2 flex items-center gap-2" style={{ color: '#34d399' }}>
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                Факт о микромире · {idx + 1}/{microFacts.length}
+              </div>
+              <p className="font-cormorant" style={{
+                fontSize: 'clamp(1.1rem, 3vw, 1.5rem)', fontWeight: 400, color: '#f0fdf4', lineHeight: 1.55,
+                opacity: animating ? 0 : 1, transform: animating ? 'translateY(8px)' : 'none', transition: 'all 0.3s ease',
+              }}>
+                {fact.fact}
+              </p>
+            </div>
+          </div>
+          <div className="flex items-center justify-end gap-2 mt-4">
+            <span className="font-montserrat text-xs" style={{ color: 'rgba(167,243,208,0.45)' }}>Нажми, чтобы узнать следующий факт</span>
+            <div className="w-6 h-6 rounded-full flex items-center justify-center" style={{ background: 'rgba(16,185,129,0.15)', border: '1px solid rgba(52,211,153,0.3)' }}>
+              <Icon name="ChevronRight" size={12} style={{ color: '#34d399' }} />
+            </div>
+          </div>
+          <div className="flex gap-1 mt-3">
+            {microFacts.map((_, i) => (
+              <div key={i} style={{ height: 2, flex: 1, borderRadius: 1, background: i === idx ? '#34d399' : 'rgba(52,211,153,0.15)', transition: 'background 0.3s ease' }} />
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function useSmoothScroll() {
+  const scrollTo = useCallback((id: string) => {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, []);
+  return scrollTo;
+}
+
 export default function Index() {
   const [activeResident, setActiveResident] = useState<number | null>(null);
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const [navVisible, setNavVisible] = useState(false);
+  const [activeSection, setActiveSection] = useState('hero');
+  const [cursorPos, setCursorPos] = useState({ x: -100, y: -100 });
+  const [cursorHover, setCursorHover] = useState(false);
+  const scrollTo = useSmoothScroll();
+
   const [particles] = useState(() =>
     Array.from({ length: 14 }, (_, i) => ({
       id: i,
@@ -183,11 +274,100 @@ export default function Index() {
     }))
   );
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const total = document.documentElement.scrollHeight - window.innerHeight;
+      setScrollProgress(total > 0 ? (window.scrollY / total) * 100 : 0);
+      setNavVisible(window.scrollY > 80);
+
+      const sections = ['hero', 'collage', 'voices', 'timeline', 'slider', 'program', 'contacts'];
+      for (const id of [...sections].reverse()) {
+        const el = document.getElementById(id);
+        if (el && window.scrollY >= el.offsetTop - 120) { setActiveSection(id); break; }
+      }
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const move = (e: MouseEvent) => { setCursorPos({ x: e.clientX, y: e.clientY }); };
+    const over = (e: MouseEvent) => {
+      const t = e.target as HTMLElement;
+      setCursorHover(!!(t.closest('button') || t.closest('a') || t.closest('[data-hover]')));
+    };
+    window.addEventListener('mousemove', move);
+    window.addEventListener('mouseover', over);
+    return () => { window.removeEventListener('mousemove', move); window.removeEventListener('mouseover', over); };
+  }, []);
+
+  const navLinks = [
+    { id: 'collage', label: 'Коллаж' },
+    { id: 'voices', label: 'Голоса' },
+    { id: 'timeline', label: 'Хроника' },
+    { id: 'slider', label: 'Архив' },
+    { id: 'program', label: 'Программа' },
+    { id: 'contacts', label: 'Контакты' },
+  ];
+
   return (
     <div className="min-h-screen" style={{ background: 'linear-gradient(160deg, #040d17 0%, #071a2e 55%, #052010 100%)' }}>
 
+      {/* ══ CUSTOM CURSOR ══ */}
+      <div className="fixed pointer-events-none z-[9999] hidden md:block" style={{
+        left: cursorPos.x, top: cursorPos.y,
+        transform: 'translate(-50%, -50%)',
+        transition: 'transform 0.15s ease, width 0.2s ease, height 0.2s ease',
+        width: cursorHover ? 40 : 20, height: cursorHover ? 40 : 20,
+      }}>
+        <div style={{
+          width: '100%', height: '100%', borderRadius: '50%',
+          border: `2px solid ${cursorHover ? '#34d399' : 'rgba(52,211,153,0.6)'}`,
+          background: cursorHover ? 'rgba(52,211,153,0.12)' : 'transparent',
+          transition: 'all 0.2s ease',
+          boxShadow: cursorHover ? '0 0 15px rgba(52,211,153,0.4)' : 'none',
+        }} />
+        {cursorHover && (
+          <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.7rem' }}>🦠</div>
+        )}
+      </div>
+
+      {/* ══ SCROLL PROGRESS BAR ══ */}
+      <div className="fixed top-0 left-0 right-0 z-50 h-0.5" style={{ background: 'rgba(16,185,129,0.1)' }}>
+        <div style={{
+          height: '100%', width: `${scrollProgress}%`,
+          background: 'linear-gradient(90deg, #10b981, #34d399)',
+          boxShadow: '0 0 8px rgba(52,211,153,0.8)',
+          transition: 'width 0.1s ease',
+        }} />
+      </div>
+
+      {/* ══ STICKY NAV ══ */}
+      <nav className="fixed top-1 left-1/2 -translate-x-1/2 z-40 transition-all duration-500 hidden md:block"
+        style={{
+          opacity: navVisible ? 1 : 0,
+          transform: `translateX(-50%) translateY(${navVisible ? '4px' : '-60px'})`,
+          pointerEvents: navVisible ? 'auto' : 'none',
+        }}>
+        <div className="glass flex items-center gap-1 px-4 py-2 rounded-full"
+          style={{ border: '1px solid rgba(16,185,129,0.2)', backdropFilter: 'blur(20px)' }}>
+          <span className="font-cormorant gradient-text mr-3" style={{ fontSize: '0.9rem', fontWeight: 700, letterSpacing: '0.05em' }}>S55</span>
+          {navLinks.map(link => (
+            <button key={link.id} onClick={() => scrollTo(link.id)}
+              className="font-montserrat text-xs px-3 py-1.5 rounded-full transition-all duration-200"
+              style={{
+                color: activeSection === link.id ? '#f0fdf4' : 'rgba(167,243,208,0.6)',
+                background: activeSection === link.id ? 'rgba(16,185,129,0.2)' : 'transparent',
+                border: activeSection === link.id ? '1px solid rgba(52,211,153,0.35)' : '1px solid transparent',
+              }}>
+              {link.label}
+            </button>
+          ))}
+        </div>
+      </nav>
+
       {/* ══ HERO ══ */}
-      <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden grid-bg px-4">
+      <section id="hero" className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden grid-bg px-4">
         <div className="absolute inset-0 pointer-events-none">
           <div style={{ position: 'absolute', top: '15%', left: '10%', width: 500, height: 500, borderRadius: '50%', background: 'radial-gradient(circle, rgba(16,185,129,0.07) 0%, transparent 70%)' }} />
           <div style={{ position: 'absolute', bottom: '5%', right: '5%', width: 400, height: 400, borderRadius: '50%', background: 'radial-gradient(circle, rgba(5,32,16,0.5) 0%, transparent 70%)' }} />
@@ -232,10 +412,10 @@ export default function Index() {
           </p>
 
           <div className="flex flex-wrap gap-3 justify-center mb-10" style={{ animation: 'fade-up 0.8s 0.45s ease-out both' }}>
-            <button className="btn-primary px-6 sm:px-8 py-3 rounded-full font-montserrat font-medium text-sm tracking-wide">
+            <button onClick={() => scrollTo('timeline')} className="btn-primary px-6 sm:px-8 py-3 rounded-full font-montserrat font-medium text-sm tracking-wide">
               Исследовать смену
             </button>
-            <button className="btn-secondary px-6 sm:px-8 py-3 rounded-full font-montserrat font-medium text-sm tracking-wide">
+            <button onClick={() => scrollTo('voices')} className="btn-secondary px-6 sm:px-8 py-3 rounded-full font-montserrat font-medium text-sm tracking-wide">
               Голоса резидентов
             </button>
           </div>
@@ -263,7 +443,7 @@ export default function Index() {
       </section>
 
       {/* ══ КОЛЛАЖ ══ */}
-      <section className="relative py-16 sm:py-24 px-4 grid-bg overflow-hidden">
+      <section id="collage" className="relative py-16 sm:py-24 px-4 grid-bg overflow-hidden">
         <div className="max-w-5xl mx-auto">
           <RevealSection className="text-center mb-10 sm:mb-14">
             <span className="font-montserrat text-xs tracking-widest uppercase" style={{ color: '#34d399' }}>Главный элемент</span>
@@ -302,6 +482,9 @@ export default function Index() {
           </RevealSection>
         </div>
       </section>
+
+      {/* ══ ЖИВОЙ ФАКТ ══ */}
+      <FactWidget />
 
       {/* ══ О КОЛЛАЖЕ ══ */}
       <section className="py-16 sm:py-24 px-4">
@@ -345,7 +528,7 @@ export default function Index() {
       </section>
 
       {/* ══ ГОЛОСА СМЕНЫ ══ */}
-      <section className="py-16 sm:py-24 px-4 grid-bg relative overflow-hidden">
+      <section id="voices" className="py-16 sm:py-24 px-4 grid-bg relative overflow-hidden">
         <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)', width: 600, height: 600, borderRadius: '50%', background: 'radial-gradient(circle, rgba(16,185,129,0.05) 0%, transparent 70%)', pointerEvents: 'none' }} />
         <div className="max-w-5xl mx-auto relative z-10">
           <RevealSection className="text-center mb-12 sm:mb-16">
@@ -411,7 +594,7 @@ export default function Index() {
       </section>
 
       {/* ══ ХРОНИКА РОСТА — ТАЙМЛАЙН ══ */}
-      <section className="py-16 sm:py-24 px-4 grid-bg relative overflow-hidden">
+      <section id="timeline" className="py-16 sm:py-24 px-4 grid-bg relative overflow-hidden">
         <div className="max-w-5xl mx-auto">
           <RevealSection className="text-center mb-14 sm:mb-20">
             <span className="font-montserrat text-xs tracking-widest uppercase" style={{ color: '#34d399' }}>Раздел №1</span>
@@ -480,7 +663,7 @@ export default function Index() {
       </section>
 
       {/* ══ СЛАЙДЕР МИКРОМИРА ══ */}
-      <section className="py-16 sm:py-24 px-4">
+      <section id="slider" className="py-16 sm:py-24 px-4">
         <div className="max-w-4xl mx-auto">
           <RevealSection className="text-center mb-10 sm:mb-14">
             <span className="font-montserrat text-xs tracking-widest uppercase" style={{ color: '#34d399' }}>Раздел №2</span>
