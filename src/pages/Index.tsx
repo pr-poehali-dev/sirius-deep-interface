@@ -512,26 +512,145 @@ export default function Index() {
         </div>
       </section>
 
-      {/* ══ О СИРИУСЕ ══ */}
-      <section className="py-16 sm:py-24 px-4 grid-bg relative overflow-hidden">
-        <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse at center, rgba(5,32,16,0.4) 0%, transparent 70%)', pointerEvents: 'none' }} />
-        <div className="max-w-5xl mx-auto relative z-10">
-          <RevealSection className="text-center mb-12 sm:mb-16">
-            <span className="font-montserrat text-xs tracking-widest uppercase" style={{ color: '#34d399' }}>О программе</span>
-            <h2 className="font-cormorant mt-2" style={{ fontSize: 'clamp(2rem, 6vw, 4.5rem)', fontWeight: 500, color: '#f0fdf4' }}>
+      {/* ══ О ПРОГРАММЕ ══ */}
+      <section className="py-16 sm:py-28 px-4 relative overflow-hidden" id="program">
+        {/* Deep glow */}
+        <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse at 20% 50%, rgba(16,185,129,0.06) 0%, transparent 60%), radial-gradient(ellipse at 80% 50%, rgba(5,32,16,0.4) 0%, transparent 60%)', pointerEvents: 'none' }} />
+
+        <div className="max-w-6xl mx-auto relative z-10">
+          <RevealSection className="text-center mb-16 sm:mb-20">
+            <span className="font-montserrat text-xs tracking-widest uppercase" style={{ color: '#34d399' }}>Образовательная программа</span>
+            <h2 className="font-cormorant mt-3" style={{ fontSize: 'clamp(2.2rem, 7vw, 5.5rem)', fontWeight: 300, color: '#f0fdf4', lineHeight: 1.05 }}>
               Прикладная<br />
-              <span className="gradient-text" style={{ fontStyle: 'italic' }}>микробиология</span>
+              <span className="gradient-text" style={{ fontWeight: 600, fontStyle: 'italic' }}>микробиология</span>
             </h2>
+            <p className="font-montserrat mt-4 max-w-2xl mx-auto" style={{ fontSize: 'clamp(0.85rem, 2vw, 1rem)', color: 'rgba(209,250,229,0.65)', lineHeight: 1.8 }}>
+              Дополнительная программа для 7–8 класса (13–14 лет), направленная на развитие исследовательских умений, познавательных интересов и творческих способностей в области микробиологии.
+            </p>
           </RevealSection>
 
-          <div className="grid sm:grid-cols-3 gap-4 sm:gap-6 mb-10 sm:mb-14">
+          {/* Main grid */}
+          <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 items-start mb-12 sm:mb-16">
+
+            {/* Left — teacher + goal */}
+            <div className="flex flex-col gap-6">
+              {/* Teacher card */}
+              <RevealSection delay={100}>
+                <div className="glass rounded-3xl overflow-hidden" style={{ border: '1px solid rgba(52,211,153,0.2)' }}>
+                  <div className="flex gap-0 flex-col sm:flex-row">
+                    <div className="sm:w-44 w-full h-44 sm:h-auto flex-shrink-0 overflow-hidden">
+                      <img
+                        src="https://cdn.poehali.dev/projects/97cbe7f0-dcca-434a-9a81-42b289806eb9/files/bba5b073-e90c-48be-838f-a57561ec7dbe.jpg"
+                        alt="Козачко Ольга Юрьевна"
+                        className="w-full h-full object-cover"
+                        style={{ filter: 'saturate(0.85)' }}
+                      />
+                    </div>
+                    <div className="p-5 sm:p-6 flex flex-col justify-center">
+                      <span className="font-montserrat text-xs tracking-widest uppercase" style={{ color: '#34d399' }}>Преподаватель</span>
+                      <h3 className="font-cormorant mt-2" style={{ fontSize: 'clamp(1.3rem, 3vw, 1.7rem)', fontWeight: 600, color: '#f0fdf4', lineHeight: 1.2 }}>
+                        Козачко<br />Ольга Юрьевна
+                      </h3>
+                      <p className="font-montserrat mt-2" style={{ fontSize: '0.75rem', color: 'rgba(167,243,208,0.7)', lineHeight: 1.6 }}>
+                        Преподаватель БПОУ «ОАТК».<br />Эксперт в области прикладной микробиологии и лабораторных исследований.
+                      </p>
+                      <div className="flex items-center gap-2 mt-3">
+                        <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                        <span className="font-montserrat text-xs" style={{ color: '#34d399' }}>Активный наставник смены</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </RevealSection>
+
+              {/* Goal */}
+              <RevealSection delay={200}>
+                <div className="glass rounded-2xl p-6 sm:p-7" style={{ background: 'linear-gradient(135deg, rgba(5,32,16,0.5), rgba(7,26,46,0.7))', borderColor: 'rgba(16,185,129,0.2)' }}>
+                  <div className="flex items-start gap-3">
+                    <span style={{ fontSize: '1.8rem', lineHeight: 1 }}>🎯</span>
+                    <div>
+                      <div className="font-montserrat text-xs tracking-widest uppercase mb-2" style={{ color: '#34d399' }}>Цель программы</div>
+                      <p className="font-montserrat leading-relaxed" style={{ fontSize: 'clamp(0.82rem, 2vw, 0.92rem)', color: 'rgba(209,250,229,0.85)' }}>
+                        Формирование познавательного интереса к микробиологии, развитие интеллектуальных способностей через проведение настоящих микробиологических исследований — от гипотезы до результата.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </RevealSection>
+
+              {/* Results blocks */}
+              <RevealSection delay={300}>
+                <div className="grid grid-cols-3 gap-3">
+                  {[
+                    { icon: '🧠', label: 'Личностный рост', desc: 'Готовность к творческой деятельности и командной работе' },
+                    { icon: '📐', label: 'Метапредметные', desc: 'Логическое мышление, планирование, научный язык' },
+                    { icon: '🧬', label: 'Предметные', desc: 'Знание строения микроорганизмов и методов исследования' },
+                  ].map((r, i) => (
+                    <div key={i} className="glass rounded-xl p-3 text-center" style={{ borderColor: 'rgba(16,185,129,0.15)' }}>
+                      <div style={{ fontSize: '1.5rem' }}>{r.icon}</div>
+                      <div className="font-montserrat font-semibold mt-2" style={{ fontSize: '0.65rem', color: '#34d399' }}>{r.label}</div>
+                      <div className="font-montserrat mt-1" style={{ fontSize: '0.6rem', color: 'rgba(167,243,208,0.6)', lineHeight: 1.5 }}>{r.desc}</div>
+                    </div>
+                  ))}
+                </div>
+              </RevealSection>
+            </div>
+
+            {/* Right — curriculum */}
+            <RevealSection delay={150}>
+              <div className="glass rounded-3xl p-6 sm:p-8" style={{ borderColor: 'rgba(16,185,129,0.2)' }}>
+                <div className="flex items-center justify-between mb-6">
+                  <div>
+                    <div className="font-montserrat text-xs tracking-widest uppercase" style={{ color: '#34d399' }}>Учебный план</div>
+                    <div className="font-cormorant mt-1" style={{ fontSize: 'clamp(1.5rem, 3vw, 2rem)', fontWeight: 600, color: '#f0fdf4' }}>Содержание</div>
+                  </div>
+                  <div className="glass rounded-xl px-3 py-2 text-center" style={{ borderColor: 'rgba(16,185,129,0.3)' }}>
+                    <div className="font-cormorant gradient-text" style={{ fontSize: '1.6rem', fontWeight: 700 }}>20</div>
+                    <div className="font-montserrat" style={{ fontSize: '0.6rem', color: 'rgba(167,243,208,0.6)' }}>часов</div>
+                  </div>
+                </div>
+
+                <div className="flex flex-col gap-2">
+                  {[
+                    { n: '01', topic: 'Мир микроорганизмов', h: 2 },
+                    { n: '02', topic: 'Лаборатория. Питательные среды', h: 2 },
+                    { n: '03', topic: 'Культивирование микроорганизмов', h: 2 },
+                    { n: '04', topic: 'Влияние факторов внешней среды', h: 2 },
+                    { n: '05', topic: 'Дезинфицирующие средства', h: 2 },
+                    { n: '06', topic: 'Оценка качества дезинфекции', h: 2 },
+                    { n: '07', topic: 'Исследование воздуха и воды', h: 2 },
+                    { n: '08', topic: 'Мини-проект «Продукты питания»', h: 2 },
+                    { n: '09', topic: 'Препараты для микроскопии', h: 2 },
+                    { n: '10', topic: 'Методы окраски. Микроскопия', h: 2 },
+                  ].map((item, i) => (
+                    <div key={i} className="flex items-center gap-3 group rounded-xl px-3 py-2.5 transition-all duration-300"
+                      style={{ background: 'rgba(16,185,129,0.03)', borderLeft: '2px solid rgba(16,185,129,0.2)' }}
+                      onMouseEnter={e => { (e.currentTarget as HTMLDivElement).style.background = 'rgba(16,185,129,0.08)'; (e.currentTarget as HTMLDivElement).style.borderLeftColor = '#34d399'; }}
+                      onMouseLeave={e => { (e.currentTarget as HTMLDivElement).style.background = 'rgba(16,185,129,0.03)'; (e.currentTarget as HTMLDivElement).style.borderLeftColor = 'rgba(16,185,129,0.2)'; }}
+                    >
+                      <span className="font-cormorant flex-shrink-0" style={{ fontSize: '0.85rem', fontWeight: 600, color: 'rgba(52,211,153,0.5)', width: 22 }}>{item.n}</span>
+                      <span className="font-montserrat flex-1" style={{ fontSize: 'clamp(0.73rem, 1.8vw, 0.82rem)', color: 'rgba(209,250,229,0.8)' }}>{item.topic}</span>
+                      <span className="font-montserrat flex-shrink-0 px-2 py-0.5 rounded-full" style={{ fontSize: '0.6rem', background: 'rgba(16,185,129,0.12)', color: '#34d399', border: '1px solid rgba(16,185,129,0.2)' }}>{item.h} ч</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </RevealSection>
+          </div>
+
+          {/* Bottom — 3 key skills */}
+          <div className="grid sm:grid-cols-3 gap-4 sm:gap-6">
             {[
-              { icon: '🔬', title: 'Живая наука', desc: 'Работа с реальными бактериальными культурами в профессиональной лаборатории. Не теория — практика.' },
-              { icon: '🧪', title: 'Методы', desc: 'Окраска по Граму, посев, инкубация, микроскопия — полный цикл микробиологического исследования.' },
-              { icon: '🌍', title: 'Масштаб', desc: 'От микрометров до глобальных процессов. Бактерии управляют климатом, здоровьем и будущим.' },
+              { icon: '🔬', title: 'Живая наука', desc: 'Работа с реальными бактериальными культурами. Посев, инкубация, микроскопия — полный цикл исследования.' },
+              { icon: '⚗️', title: 'Собственный проект', desc: 'Каждый резидент разрабатывает и защищает личный мини-проект по выбранной теме программы.' },
+              { icon: '🌍', title: 'Практическое мышление', desc: 'Навыки работы в лаборатории, соблюдение протоколов безопасности и научная коммуникация.' },
             ].map((item, i) => (
-              <RevealSection key={i} delay={i * 130}>
-                <div className="glass rounded-2xl p-5 sm:p-6 h-full">
+              <RevealSection key={i} delay={i * 100}>
+                <div className="glass rounded-2xl p-5 sm:p-6 h-full group cursor-default transition-all duration-300"
+                  style={{ borderColor: 'rgba(16,185,129,0.15)' }}
+                  onMouseEnter={e => { (e.currentTarget as HTMLDivElement).style.borderColor = 'rgba(52,211,153,0.4)'; (e.currentTarget as HTMLDivElement).style.transform = 'translateY(-4px)'; }}
+                  onMouseLeave={e => { (e.currentTarget as HTMLDivElement).style.borderColor = 'rgba(16,185,129,0.15)'; (e.currentTarget as HTMLDivElement).style.transform = 'none'; }}
+                >
                   <div style={{ fontSize: 'clamp(2rem, 5vw, 2.5rem)' }}>{item.icon}</div>
                   <h3 className="font-cormorant gradient-text mt-3" style={{ fontSize: 'clamp(1.2rem, 3vw, 1.5rem)', fontWeight: 600 }}>{item.title}</h3>
                   <p className="font-montserrat mt-3 leading-relaxed" style={{ fontSize: 'clamp(0.78rem, 1.8vw, 0.88rem)', color: 'rgba(209,250,229,0.7)' }}>{item.desc}</p>
@@ -539,34 +658,109 @@ export default function Index() {
               </RevealSection>
             ))}
           </div>
+        </div>
+      </section>
 
-          <RevealSection delay={200}>
-            <div className="glass rounded-3xl p-6 sm:p-10" style={{ background: 'linear-gradient(135deg, rgba(7,26,46,0.8), rgba(5,32,16,0.6))' }}>
-              <div className="grid md:grid-cols-2 gap-8 items-center">
-                <div>
-                  <span className="font-montserrat text-xs tracking-widest uppercase" style={{ color: '#34d399' }}>Образовательная организация</span>
-                  <h3 className="font-cormorant mt-2" style={{ fontSize: 'clamp(2rem, 5vw, 2.8rem)', fontWeight: 600, color: '#f0fdf4' }}>Сириус</h3>
-                  <p className="font-montserrat mt-4 leading-relaxed" style={{ fontSize: 'clamp(0.78rem, 2vw, 0.9rem)', color: 'rgba(209,250,229,0.75)' }}>
-                    Образовательный центр «Сириус» — место, где встречаются самые талантливые школьники страны и лучшие наставники. Программа смены 55 посвящена прикладной микробиологии: науке, которая формирует наше понимание жизни на самом фундаментальном уровне.
-                  </p>
-                  <p className="font-montserrat mt-4 leading-relaxed" style={{ fontSize: 'clamp(0.78rem, 2vw, 0.9rem)', color: 'rgba(209,250,229,0.75)' }}>
-                    Резиденты работают в реальных лабораторных условиях, осваивают профессиональные методики и открывают для себя карьерные перспективы в биотехнологиях, медицине и экологии.
-                  </p>
+      {/* ══ КОНТАКТЫ ══ */}
+      <section className="py-16 sm:py-24 px-4 grid-bg relative overflow-hidden" id="contacts">
+        <div style={{ position: 'absolute', top: '40%', left: '50%', transform: 'translate(-50%,-50%)', width: 700, height: 700, borderRadius: '50%', background: 'radial-gradient(circle, rgba(16,185,129,0.06) 0%, transparent 65%)', pointerEvents: 'none' }} />
+        <div className="max-w-3xl mx-auto relative z-10">
+          <RevealSection className="text-center mb-12 sm:mb-16">
+            <span className="font-montserrat text-xs tracking-widest uppercase" style={{ color: '#34d399' }}>Связаться</span>
+            <h2 className="font-cormorant mt-3" style={{ fontSize: 'clamp(2.2rem, 7vw, 5rem)', fontWeight: 600, color: '#f0fdf4' }}>
+              Хочешь в<br />
+              <span className="gradient-text" style={{ fontStyle: 'italic' }}>Сириус 55?</span>
+            </h2>
+            <p className="font-montserrat mt-4 max-w-md mx-auto" style={{ fontSize: 'clamp(0.85rem, 2vw, 0.95rem)', color: 'rgba(209,250,229,0.6)', lineHeight: 1.8 }}>
+              Не знаешь, стоит ли ехать на направление прикладной микробиологии? Спроси у нас — резиденты смены 55 готовы ответить на любые вопросы.
+            </p>
+          </RevealSection>
+
+          <div className="grid sm:grid-cols-2 gap-5 sm:gap-6 mb-8">
+            {/* Telegram */}
+            <RevealSection delay={100}>
+              <a
+                href="https://t.me/silver285"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block glass rounded-2xl p-6 sm:p-8 transition-all duration-300 group"
+                style={{ borderColor: 'rgba(16,185,129,0.2)', textDecoration: 'none' }}
+                onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.borderColor = 'rgba(52,211,153,0.5)'; (e.currentTarget as HTMLAnchorElement).style.transform = 'translateY(-5px)'; (e.currentTarget as HTMLAnchorElement).style.boxShadow = '0 15px 40px rgba(16,185,129,0.15)'; }}
+                onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.borderColor = 'rgba(16,185,129,0.2)'; (e.currentTarget as HTMLAnchorElement).style.transform = 'none'; (e.currentTarget as HTMLAnchorElement).style.boxShadow = 'none'; }}
+              >
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0"
+                    style={{ background: 'linear-gradient(135deg, rgba(16,185,129,0.2), rgba(52,211,153,0.1))', border: '1px solid rgba(52,211,153,0.3)' }}>
+                    <span style={{ fontSize: '1.8rem' }}>✈️</span>
+                  </div>
+                  <div>
+                    <div className="font-montserrat text-xs tracking-widest uppercase mb-1" style={{ color: '#34d399' }}>Telegram</div>
+                    <div className="font-cormorant" style={{ fontSize: '1.4rem', fontWeight: 600, color: '#f0fdf4' }}>@silver285</div>
+                  </div>
                 </div>
-                <div className="grid grid-cols-2 gap-3 sm:gap-4">
-                  {[
-                    { n: 2014, s: 'год основания', suf: '' },
-                    { n: 55, s: 'номер смены', suf: '' },
-                    { n: 5, s: 'дней интенсива', suf: '' },
-                    { n: 100, s: 'науки в деле', suf: '%' },
-                  ].map((item, i) => (
-                    <div key={i} className="glass rounded-xl p-3 sm:p-4 text-center">
-                      <div className="font-cormorant gradient-text" style={{ fontSize: 'clamp(1.4rem, 4vw, 1.7rem)', fontWeight: 700 }}>
-                        <AnimatedCounter target={item.n} suffix={item.suf} />
-                      </div>
-                      <div className="font-montserrat mt-1" style={{ fontSize: 'clamp(0.6rem, 1.5vw, 0.7rem)', color: 'rgba(167,243,208,0.6)' }}>{item.s}</div>
-                    </div>
-                  ))}
+                <p className="font-montserrat" style={{ fontSize: '0.82rem', color: 'rgba(209,250,229,0.65)', lineHeight: 1.7 }}>
+                  Напиши нам в Telegram — расскажем всё про смену, лабораторию и что взять с собой. Отвечаем быстро!
+                </p>
+                <div className="mt-4 flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                  <span className="font-montserrat text-xs" style={{ color: 'rgba(52,211,153,0.7)' }}>Онлайн · Быстрый ответ</span>
+                </div>
+              </a>
+            </RevealSection>
+
+            {/* Phone */}
+            <RevealSection delay={200}>
+              <a
+                href="tel:+79836232746"
+                className="block glass rounded-2xl p-6 sm:p-8 transition-all duration-300"
+                style={{ borderColor: 'rgba(16,185,129,0.2)', textDecoration: 'none' }}
+                onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.borderColor = 'rgba(52,211,153,0.5)'; (e.currentTarget as HTMLAnchorElement).style.transform = 'translateY(-5px)'; (e.currentTarget as HTMLAnchorElement).style.boxShadow = '0 15px 40px rgba(16,185,129,0.15)'; }}
+                onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.borderColor = 'rgba(16,185,129,0.2)'; (e.currentTarget as HTMLAnchorElement).style.transform = 'none'; (e.currentTarget as HTMLAnchorElement).style.boxShadow = 'none'; }}
+              >
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0"
+                    style={{ background: 'linear-gradient(135deg, rgba(16,185,129,0.2), rgba(52,211,153,0.1))', border: '1px solid rgba(52,211,153,0.3)' }}>
+                    <span style={{ fontSize: '1.8rem' }}>📱</span>
+                  </div>
+                  <div>
+                    <div className="font-montserrat text-xs tracking-widest uppercase mb-1" style={{ color: '#34d399' }}>Телефон</div>
+                    <div className="font-cormorant" style={{ fontSize: '1.4rem', fontWeight: 600, color: '#f0fdf4' }}>8 983 623-27-46</div>
+                  </div>
+                </div>
+                <p className="font-montserrat" style={{ fontSize: '0.82rem', color: 'rgba(209,250,229,0.65)', lineHeight: 1.7 }}>
+                  Можно позвонить и поговорить голосом. Расскажем о программе, условиях смены и ответим на все вопросы.
+                </p>
+                <div className="mt-4 flex items-center gap-2">
+                  <Icon name="Phone" size={12} style={{ color: 'rgba(52,211,153,0.7)' }} />
+                  <span className="font-montserrat text-xs" style={{ color: 'rgba(52,211,153,0.7)' }}>Звонки · Пн–Пт, 9:00–20:00</span>
+                </div>
+              </a>
+            </RevealSection>
+          </div>
+
+          {/* CTA banner */}
+          <RevealSection delay={300}>
+            <div className="rounded-2xl sm:rounded-3xl p-6 sm:p-8 text-center relative overflow-hidden"
+              style={{ background: 'linear-gradient(135deg, rgba(16,185,129,0.12) 0%, rgba(5,32,16,0.6) 50%, rgba(16,185,129,0.08) 100%)', border: '1px solid rgba(52,211,153,0.25)' }}>
+              <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse at 50% 0%, rgba(52,211,153,0.08) 0%, transparent 60%)', pointerEvents: 'none' }} />
+              <div className="relative z-10">
+                <div className="font-cormorant" style={{ fontSize: 'clamp(1.4rem, 4vw, 2.2rem)', fontWeight: 600, color: '#f0fdf4' }}>
+                  Не упусти свой шанс
+                </div>
+                <p className="font-montserrat mt-3" style={{ fontSize: 'clamp(0.8rem, 2vw, 0.9rem)', color: 'rgba(209,250,229,0.65)', maxWidth: 400, margin: '12px auto 0' }}>
+                  Смена 55 стала незабываемой для каждого резидента. Следующая может стать твоей точкой отсчёта в науке.
+                </p>
+                <div className="flex flex-wrap gap-3 justify-center mt-6">
+                  <a href="https://t.me/silver285" target="_blank" rel="noopener noreferrer"
+                    className="btn-primary px-6 sm:px-8 py-3 rounded-full font-montserrat font-medium text-sm tracking-wide inline-block"
+                    style={{ textDecoration: 'none', color: '#fff' }}>
+                    Написать в Telegram
+                  </a>
+                  <a href="tel:+79836232746"
+                    className="btn-secondary px-6 sm:px-8 py-3 rounded-full font-montserrat font-medium text-sm tracking-wide inline-block"
+                    style={{ textDecoration: 'none' }}>
+                    Позвонить
+                  </a>
                 </div>
               </div>
             </div>
@@ -575,13 +769,60 @@ export default function Index() {
       </section>
 
       {/* ══ FOOTER ══ */}
-      <footer className="py-10 sm:py-12 px-4 text-center" style={{ borderTop: '1px solid rgba(16,185,129,0.1)' }}>
-        <div className="font-cormorant gradient-text" style={{ fontSize: 'clamp(1.4rem, 4vw, 1.9rem)', fontWeight: 600 }}>СИРИУС 55</div>
-        <p className="font-montserrat text-xs mt-2" style={{ color: 'rgba(167,243,208,0.4)', letterSpacing: '0.12em' }}>ПРИКЛАДНАЯ МИКРОБИОЛОГИЯ · МИР ВОЗМОЖНОСТЕЙ</p>
-        <div className="flex justify-center gap-2 mt-4">
-          {[0, 0.3, 0.6].map((d, i) => (
-            <span key={i} className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" style={{ animationDelay: `${d}s` }} />
-          ))}
+      <footer className="relative py-12 sm:py-16 px-4 overflow-hidden" style={{ borderTop: '1px solid rgba(16,185,129,0.12)' }}>
+        <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse at 50% 100%, rgba(16,185,129,0.05) 0%, transparent 60%)', pointerEvents: 'none' }} />
+        <div className="max-w-4xl mx-auto relative z-10">
+          <div className="text-center mb-8">
+            <div className="font-cormorant gradient-text" style={{ fontSize: 'clamp(2rem, 6vw, 3.5rem)', fontWeight: 600, letterSpacing: '0.05em' }}>
+              СИРИУС 55
+            </div>
+            <p className="font-montserrat text-xs mt-2 tracking-widest uppercase" style={{ color: 'rgba(167,243,208,0.35)' }}>
+              Прикладная микробиология · Мир возможностей · 2025
+            </p>
+          </div>
+
+          {/* Links row */}
+          <div className="flex flex-wrap justify-center gap-4 sm:gap-8 mb-10">
+            {[
+              { label: 'Коллаж', href: '#' },
+              { label: 'Голоса смены', href: '#' },
+              { label: 'Хроника', href: '#' },
+              { label: 'Программа', href: '#program' },
+              { label: 'Контакты', href: '#contacts' },
+            ].map((link, i) => (
+              <a key={i} href={link.href} className="font-montserrat text-xs tracking-wider transition-colors duration-200"
+                style={{ color: 'rgba(167,243,208,0.45)', textDecoration: 'none' }}
+                onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.color = '#34d399'; }}
+                onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.color = 'rgba(167,243,208,0.45)'; }}>
+                {link.label}
+              </a>
+            ))}
+          </div>
+
+          <div className="flex justify-center gap-2 mb-8">
+            {[0, 0.25, 0.5, 0.75, 1].map((d, i) => (
+              <span key={i} className="rounded-full bg-emerald-500"
+                style={{ width: i === 2 ? 6 : 4, height: i === 2 ? 6 : 4, opacity: i === 2 ? 1 : 0.4, animation: 'pulse 2s ease-in-out infinite', animationDelay: `${d}s` }} />
+            ))}
+          </div>
+
+          {/* Credits */}
+          <div className="text-center">
+            <div className="inline-flex items-center gap-3 glass px-5 py-3 rounded-full"
+              style={{ borderColor: 'rgba(16,185,129,0.15)' }}>
+              <span style={{ fontSize: '1rem' }}>⚗️</span>
+              <span className="font-montserrat text-xs" style={{ color: 'rgba(167,243,208,0.5)' }}>
+                Цифровой дизайн при участии
+              </span>
+              <span className="font-cormorant" style={{ fontSize: '1rem', fontWeight: 600, color: 'rgba(52,211,153,0.75)' }}>
+                Бабкина Артёма
+              </span>
+              <span className="font-montserrat text-xs" style={{ color: 'rgba(167,243,208,0.35)' }}>· 2026</span>
+            </div>
+            <p className="font-montserrat text-xs mt-3" style={{ color: 'rgba(167,243,208,0.2)', fontSize: '0.65rem' }}>
+              Оценено судьями конкурса · Смена 55 · Сириус
+            </p>
+          </div>
         </div>
       </footer>
     </div>
