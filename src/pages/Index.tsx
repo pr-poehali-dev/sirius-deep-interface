@@ -777,7 +777,7 @@ export default function Index() {
               СИРИУС 55
             </div>
             <p className="font-montserrat text-xs mt-2 tracking-widest uppercase" style={{ color: 'rgba(167,243,208,0.35)' }}>
-              Прикладная микробиология · Мир возможностей · 2025
+              Прикладная микробиология · Мир возможностей · 2026
             </p>
           </div>
 
