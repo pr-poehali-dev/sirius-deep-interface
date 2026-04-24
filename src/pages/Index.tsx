@@ -735,7 +735,7 @@ export default function Index() {
                         Кожахметова<br />Ботагоз Имангелиевна
                       </h3>
                       <p className="font-montserrat mt-2" style={{ fontSize: '0.75rem', color: 'rgba(167,243,208,0.7)', lineHeight: 1.6 }}>
-                        Преподаватель БПОУ «ОАТК».<br />Эксперт в области прикладной микробиологии и лабораторных исследований.
+                        Преподаватель программы «Прикладная микробиология» РПС «Сириус 55-2025/21».<br />Преподаватель БПОУ ОО «Омский аграрно-технологический колледж».<br />Заведующая мастерской «Геномная инженерия».
                       </p>
                       <div className="flex items-center gap-2 mt-3">
                         <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
