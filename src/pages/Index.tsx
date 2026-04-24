@@ -723,8 +723,8 @@ export default function Index() {
                   <div className="flex gap-0 flex-col sm:flex-row">
                     <div className="sm:w-44 w-full h-44 sm:h-auto flex-shrink-0 overflow-hidden">
                       <img
-                        src="https://cdn.poehali.dev/projects/97cbe7f0-dcca-434a-9a81-42b289806eb9/files/bba5b073-e90c-48be-838f-a57561ec7dbe.jpg"
-                        alt="Козачко Ольга Юрьевна"
+                        src="https://cdn.poehali.dev/projects/97cbe7f0-dcca-434a-9a81-42b289806eb9/bucket/d3bb239f-31a9-4f8d-aba5-34bad3d3af29.jpg"
+                        alt="Кожахметова Ботагоз Имангелиевна"
                         className="w-full h-full object-cover"
                         style={{ filter: 'saturate(0.85)' }}
                       />
@@ -732,7 +732,7 @@ export default function Index() {
                     <div className="p-5 sm:p-6 flex flex-col justify-center">
                       <span className="font-montserrat text-xs tracking-widest uppercase" style={{ color: '#34d399' }}>Преподаватель</span>
                       <h3 className="font-cormorant mt-2" style={{ fontSize: 'clamp(1.3rem, 3vw, 1.7rem)', fontWeight: 600, color: '#f0fdf4', lineHeight: 1.2 }}>
-                        Козачко<br />Ольга Юрьевна
+                        Кожахметова<br />Ботагоз Имангелиевна
                       </h3>
                       <p className="font-montserrat mt-2" style={{ fontSize: '0.75rem', color: 'rgba(167,243,208,0.7)', lineHeight: 1.6 }}>
                         Преподаватель БПОУ «ОАТК».<br />Эксперт в области прикладной микробиологии и лабораторных исследований.
