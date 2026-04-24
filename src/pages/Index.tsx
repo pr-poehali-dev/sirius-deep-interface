@@ -527,69 +527,36 @@ export default function Index() {
         </div>
       </section>
 
-      {/* ══ ГОЛОСА СМЕНЫ ══ */}
-      <section id="voices" className="py-16 sm:py-24 px-4 grid-bg relative overflow-hidden">
-        <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)', width: 600, height: 600, borderRadius: '50%', background: 'radial-gradient(circle, rgba(16,185,129,0.05) 0%, transparent 70%)', pointerEvents: 'none' }} />
-        <div className="max-w-5xl mx-auto relative z-10">
-          <RevealSection className="text-center mb-12 sm:mb-16">
-            <span className="font-montserrat text-xs tracking-widest uppercase" style={{ color: '#34d399' }}>Мнения</span>
-            <h2 className="font-cormorant gradient-text mt-2" style={{ fontSize: 'clamp(2rem, 7vw, 5rem)', fontWeight: 600 }}>
-              Голоса смены
+      {/* ══ СЛАЙДЕР МИКРОМИРА ══ */}
+      <section id="slider" className="py-16 sm:py-24 px-4">
+        <div className="max-w-4xl mx-auto">
+          <RevealSection className="text-center mb-10 sm:mb-14">
+            <span className="font-montserrat text-xs tracking-widest uppercase" style={{ color: '#34d399' }}>Раздел №2</span>
+            <h2 className="font-cormorant gradient-text mt-2" style={{ fontSize: 'clamp(2rem, 6vw, 4.5rem)', fontWeight: 600 }}>
+              От идеи к культуре
             </h2>
+            <p className="font-montserrat text-sm mt-2" style={{ color: 'rgba(167,243,208,0.55)' }}>Лабораторный архив: слайдер микромира</p>
+            <p className="font-montserrat text-xs mt-1.5" style={{ color: 'rgba(167,243,208,0.38)' }}>Потяни ползунок — увидишь обе стороны науки</p>
           </RevealSection>
 
-          {/* Avatar row */}
-          <RevealSection className="flex justify-center gap-3 sm:gap-6 mb-10 sm:mb-12 flex-wrap" delay={150}>
-            {residents.map((r, i) => (
-              <button key={i} className="flex flex-col items-center gap-2 cursor-pointer bg-transparent border-0"
-                onClick={() => setActiveResident(activeResident === i ? null : i)}>
-                <div className="relative avatar-hover">
-                  <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full overflow-hidden"
-                    style={{
-                      border: activeResident === i ? '2px solid #34d399' : '2px solid rgba(16,185,129,0.25)',
-                      boxShadow: activeResident === i ? '0 0 25px rgba(16,185,129,0.5)' : 'none',
-                      transition: 'all 0.3s ease',
-                    }}>
-                    <img src={r.photo} alt={r.name} className="w-full h-full object-cover" />
-                  </div>
-                  <span className="absolute inset-0 rounded-full" style={{ border: '2px solid rgba(16,185,129,0.3)', animation: `pulse-ring ${1.6 + i * 0.25}s ease-out infinite` }} />
-                  <span className="absolute -bottom-0.5 -right-0.5 w-4 h-4 rounded-full bg-emerald-500 border-2"
-                    style={{ borderColor: '#040d17', animation: 'pulse 2s ease-in-out infinite' }} />
-                </div>
-                <span className="font-montserrat" style={{ fontSize: '0.7rem', color: 'rgba(167,243,208,0.75)' }}>{r.name}</span>
-              </button>
-            ))}
+          <RevealSection delay={150}>
+            <ImageSlider />
           </RevealSection>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
-            {residents.map((r, i) => (
-              <RevealSection key={i} delay={i * 90}>
-                <div className="glass rounded-2xl p-5 cursor-pointer h-full flex flex-col"
-                  style={{
-                    borderColor: activeResident === i ? 'rgba(52,211,153,0.55)' : 'rgba(16,185,129,0.15)',
-                    boxShadow: activeResident === i ? '0 0 35px rgba(16,185,129,0.15)' : 'none',
-                    transform: activeResident === i ? 'translateY(-5px)' : 'none',
-                    transition: 'all 0.4s ease',
-                  }}
-                  onClick={() => setActiveResident(activeResident === i ? null : i)}
-                >
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="w-11 h-11 rounded-full overflow-hidden flex-shrink-0 border border-emerald-900">
-                      <img src={r.photo} alt={r.name} className="w-full h-full object-cover" />
-                    </div>
-                    <div>
-                      <div className="font-montserrat font-semibold" style={{ fontSize: '0.9rem', color: '#f0fdf4' }}>{r.name}</div>
-                      <div className="font-montserrat" style={{ fontSize: '0.7rem', color: '#34d399' }}>Резидент · Сириус 55</div>
-                    </div>
-                    <span className="ml-auto w-2 h-2 rounded-full bg-emerald-400 flex-shrink-0 animate-pulse" />
-                  </div>
-                  <p className="font-montserrat flex-1" style={{ fontSize: 'clamp(0.78rem, 1.8vw, 0.85rem)', color: 'rgba(209,250,229,0.75)', fontStyle: 'italic', lineHeight: 1.7 }}>
-                    {r.text}
-                  </p>
+          <RevealSection delay={350} className="grid grid-cols-3 gap-3 sm:gap-4 mt-6 sm:mt-8">
+            {[
+              { label: 'Время инкубации', value: 48, suffix: 'ч' },
+              { label: 'Колоний выращено', value: 127, suffix: '+' },
+              { label: 'Опытов проведено', value: 18, suffix: '' },
+            ].map((s, i) => (
+              <div key={i} className="glass rounded-xl p-3 sm:p-4 text-center">
+                <div className="font-cormorant gradient-text" style={{ fontSize: 'clamp(1.4rem, 4vw, 1.9rem)', fontWeight: 600 }}>
+                  <AnimatedCounter target={s.value} suffix={s.suffix} />
                 </div>
-              </RevealSection>
+                <div className="font-montserrat mt-1" style={{ fontSize: 'clamp(0.58rem, 1.6vw, 0.7rem)', color: 'rgba(167,243,208,0.6)' }}>{s.label}</div>
+              </div>
             ))}
-          </div>
+          </RevealSection>
         </div>
       </section>
 
@@ -662,36 +629,69 @@ export default function Index() {
         </div>
       </section>
 
-      {/* ══ СЛАЙДЕР МИКРОМИРА ══ */}
-      <section id="slider" className="py-16 sm:py-24 px-4">
-        <div className="max-w-4xl mx-auto">
-          <RevealSection className="text-center mb-10 sm:mb-14">
-            <span className="font-montserrat text-xs tracking-widest uppercase" style={{ color: '#34d399' }}>Раздел №2</span>
-            <h2 className="font-cormorant gradient-text mt-2" style={{ fontSize: 'clamp(2rem, 6vw, 4.5rem)', fontWeight: 600 }}>
-              От идеи к культуре
+      {/* ══ ГОЛОСА СМЕНЫ ══ */}
+      <section id="voices" className="py-16 sm:py-24 px-4 grid-bg relative overflow-hidden">
+        <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)', width: 600, height: 600, borderRadius: '50%', background: 'radial-gradient(circle, rgba(16,185,129,0.05) 0%, transparent 70%)', pointerEvents: 'none' }} />
+        <div className="max-w-5xl mx-auto relative z-10">
+          <RevealSection className="text-center mb-12 sm:mb-16">
+            <span className="font-montserrat text-xs tracking-widest uppercase" style={{ color: '#34d399' }}>Мнения</span>
+            <h2 className="font-cormorant gradient-text mt-2" style={{ fontSize: 'clamp(2rem, 7vw, 5rem)', fontWeight: 600 }}>
+              Голоса смены
             </h2>
-            <p className="font-montserrat text-sm mt-2" style={{ color: 'rgba(167,243,208,0.55)' }}>Лабораторный архив: слайдер микромира</p>
-            <p className="font-montserrat text-xs mt-1.5" style={{ color: 'rgba(167,243,208,0.38)' }}>Потяни ползунок — увидишь обе стороны науки</p>
           </RevealSection>
 
-          <RevealSection delay={150}>
-            <ImageSlider />
-          </RevealSection>
-
-          <RevealSection delay={350} className="grid grid-cols-3 gap-3 sm:gap-4 mt-6 sm:mt-8">
-            {[
-              { label: 'Время инкубации', value: 48, suffix: 'ч' },
-              { label: 'Колоний выращено', value: 127, suffix: '+' },
-              { label: 'Опытов проведено', value: 18, suffix: '' },
-            ].map((s, i) => (
-              <div key={i} className="glass rounded-xl p-3 sm:p-4 text-center">
-                <div className="font-cormorant gradient-text" style={{ fontSize: 'clamp(1.4rem, 4vw, 1.9rem)', fontWeight: 600 }}>
-                  <AnimatedCounter target={s.value} suffix={s.suffix} />
+          {/* Avatar row */}
+          <RevealSection className="flex justify-center gap-3 sm:gap-6 mb-10 sm:mb-12 flex-wrap" delay={150}>
+            {residents.map((r, i) => (
+              <button key={i} className="flex flex-col items-center gap-2 cursor-pointer bg-transparent border-0"
+                onClick={() => setActiveResident(activeResident === i ? null : i)}>
+                <div className="relative avatar-hover">
+                  <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full overflow-hidden"
+                    style={{
+                      border: activeResident === i ? '2px solid #34d399' : '2px solid rgba(16,185,129,0.25)',
+                      boxShadow: activeResident === i ? '0 0 25px rgba(16,185,129,0.5)' : 'none',
+                      transition: 'all 0.3s ease',
+                    }}>
+                    <img src={r.photo} alt={r.name} className="w-full h-full object-cover" />
+                  </div>
+                  <span className="absolute inset-0 rounded-full" style={{ border: '2px solid rgba(16,185,129,0.3)', animation: `pulse-ring ${1.6 + i * 0.25}s ease-out infinite` }} />
+                  <span className="absolute -bottom-0.5 -right-0.5 w-4 h-4 rounded-full bg-emerald-500 border-2"
+                    style={{ borderColor: '#040d17', animation: 'pulse 2s ease-in-out infinite' }} />
                 </div>
-                <div className="font-montserrat mt-1" style={{ fontSize: 'clamp(0.58rem, 1.6vw, 0.7rem)', color: 'rgba(167,243,208,0.6)' }}>{s.label}</div>
-              </div>
+                <span className="font-montserrat" style={{ fontSize: '0.7rem', color: 'rgba(167,243,208,0.75)' }}>{r.name}</span>
+              </button>
             ))}
           </RevealSection>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+            {residents.map((r, i) => (
+              <RevealSection key={i} delay={i * 90}>
+                <div className="glass rounded-2xl p-5 cursor-pointer h-full flex flex-col"
+                  style={{
+                    borderColor: activeResident === i ? 'rgba(52,211,153,0.55)' : 'rgba(16,185,129,0.15)',
+                    boxShadow: activeResident === i ? '0 0 35px rgba(16,185,129,0.15)' : 'none',
+                    transform: activeResident === i ? 'translateY(-5px)' : 'none',
+                    transition: 'all 0.4s ease',
+                  }}
+                  onClick={() => setActiveResident(activeResident === i ? null : i)}
+                >
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-11 h-11 rounded-full overflow-hidden flex-shrink-0 border border-emerald-900">
+                      <img src={r.photo} alt={r.name} className="w-full h-full object-cover" />
+                    </div>
+                    <div>
+                      <div className="font-montserrat font-semibold" style={{ fontSize: '0.9rem', color: '#f0fdf4' }}>{r.name}</div>
+                      <div className="font-montserrat" style={{ fontSize: '0.7rem', color: '#34d399' }}>Резидент · Сириус 55</div>
+                    </div>
+                    <span className="ml-auto w-2 h-2 rounded-full bg-emerald-400 flex-shrink-0 animate-pulse" />
+                  </div>
+                  <p className="font-montserrat flex-1" style={{ fontSize: 'clamp(0.78rem, 1.8vw, 0.85rem)', color: 'rgba(209,250,229,0.75)', fontStyle: 'italic', lineHeight: 1.7 }}>
+                    {r.text}
+                  </p>
+                </div>
+              </RevealSection>
+            ))}
+          </div>
         </div>
       </section>
 
